@@ -59,13 +59,14 @@ def main():
 
                 logging.info(f'Round {round} started.')
                 scheduledTime = datetime.strptime((expectedTimeOrHandwave[0].decode('utf-8')),'%y-%m-%d %H:%M:%S.%f')
-
+                logging.info(f"Scheduled Time: {scheduledTime}")
+                camera.start_preview()
                 logging.info(f"Sleeping for {(scheduledTime-datetime.now()).total_seconds()} seconds.")
                 assert (scheduledTime > datetime.now())
                 sleep((scheduledTime-datetime.now()).total_seconds())
                 camera.capture(CAPTURE_FILEPATH)
-                logging.info(f"Captured image at {datetime.now().strftime('%H:%M:%S')}")
-
+                logging.info(f"Captured image at {datetime.now().strftime('%H:%M:%S.%f')}")
+                camera.stop_preview()
                 # Send image to client
                 with open(CAPTURE_FILEPATH, 'rb') as file:
                     image_data = file.read()

@@ -1,3 +1,4 @@
+from datetime import timedelta
 
 BUFFER_SIZE = 1024
 NETWORK_ID = '192.168.0'
@@ -17,6 +18,9 @@ BLOCK_LIST = [
 
 PORT = 20001
 BARRIER_THRESHOLD = len(HOST_IDS) - len(BLOCK_LIST)
+BUFFER_SIZE = 1024
+DELAY = timedelta(seconds=10)
+TIMEOUT = timedelta(seconds=100)
 
 if __name__ == "__main__":
     print ("[PARAM]:\tbarrier threshold:", BARRIER_THRESHOLD)
